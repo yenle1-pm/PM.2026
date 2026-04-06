@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent: Người Bạn Đồng Hành Thông Minh | Seminar for Non-Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #a60364;
+            --primary-light: #d81b60;
+            --secondary: #6200ea;
+            --bg-dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(166, 3, 100, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(98, 0, 234, 0.15) 0%, transparent 40%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            gap: 5%;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 10px 20px -5px rgba(166, 3, 100, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(166, 3, 100, 0.6);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-light);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 150px;
+            }
+            h1 { font-size: 3rem; }
+            .hero-p { margin-left: auto; margin-right: auto; }
+        }
+
+        footer {
+            padding: 3rem 10%;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo">AI SEMINAR</div>
+        <div class="nav-links">
+            <a href="#about">Về AI Agent</a>
+            <a href="#agenda">Nội dung</a>
+            <a href="#contact">Đăng ký</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>Đánh Thức Quyền Năng <br><span class="highlight">AI Agent</span></h1>
+            <p class="hero-p">Khám phá cách những "Trợ lý ảo thông minh" giúp bạn tối ưu hóa công việc hàng ngày mà không cần biết viết code! Chào mừng Non-tech People đến với thế giới mới.</p>
+            <a href="#about" class="btn btn-primary">Bắt Đầu Khám Phá</a>
+        </div>
+        <div class="hero-image">
+            <img src="assets/hero.png" alt="AI Agent Assistant">
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="section-title scroll-reveal">
+            <h2>AI Agent là gì?</h2>
+            <p>Không chỉ là Chatbot, đó là người đồng sự thực thụ.</p>
+        </div>
+        <div class="grid">
+            <div class="card scroll-reveal">
+                <span class="card-icon">🤖</span>
+                <h3>Tự Động Hóa</h3>
+                <p>AI Agent có thể tự thực hiện các chuỗi hành động thay vì chỉ trả lời câu hỏi đơn thuần.</p>
+            </div>
+            <div class="card scroll-reveal">
+                <span class="card-icon">🧠</span>
+                <h3>Hiểu Mục Tiêu</h3>
+                <p>Bạn chỉ cần đưa ra mục tiêu cuối cùng, Agent sẽ tự lập kế hoạch và thực hiện từng bước.</p>
+            </div>
+            <div class="card scroll-reveal">
+                <span class="card-icon">🚀</span>
+                <h3>Dành Cho Mọi Người</h3>
+                <p>Giao tiếp hoàn toàn bằng ngôn ngữ tự nhiên. Không cần kiến thức lập trình.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="agenda" style="background: rgba(0,0,0,0.2);">
+        <div class="section-title scroll-reveal">
+            <h2>Nội Dung Seminar</h2>
+        </div>
+        <div class="grid">
+            <div class="card scroll-reveal">
+                <h3>Phần 1: Tổng Quan</h3>
+                <p>Lịch sử hình thành và tại sao AI Agent lại là "Big Thing" tiếp theo sau ChatGPT.</p>
+            </div>
+            <div class="card scroll-reveal">
+                <h3>Phần 2: Case Studies</h3>
+                <p>Xem cách AI Agent soạn email, lên lịch họp và nghiên cứu thị trường tự động.</p>
+            </div>
+            <div class="card scroll-reveal">
+                <h3>Phần 3: Thực Hành</h3>
+                <p>Hướng dẫn tạo "Agent" đầu tiên của riêng bạn chỉ trong 10 phút.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AI Agent Seminar for Non-Tech. Created with ❤️ for MOMO.PM</p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".scroll-reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Initial check
+        reveal();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
