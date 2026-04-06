@@ -66,6 +66,7 @@
             font-weight: 800;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -120,12 +121,14 @@
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #fff, #94a3b8);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .highlight {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -159,7 +162,53 @@
 
         /* Sections */
         section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding: 100px 10%;
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .agenda-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--glass);
+            border-radius: 1.5rem;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .agenda-item:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-light);
+        }
+
+        .agenda-time {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            min-width: 100px;
         }
 
         .section-title {
@@ -259,12 +308,53 @@
         <div class="hero-content">
             <h1>Đánh Thức Quyền Năng <br><span class="highlight">AI Agent</span></h1>
             <p class="hero-p">Khám phá cách những "Trợ lý ảo thông minh" giúp bạn tối ưu hóa công việc hàng ngày mà không cần biết viết code! Chào mừng Non-tech People đến với thế giới mới.</p>
-            <a href="#about" class="btn btn-primary">Bắt Đầu Khám Phá</a>
+            <div class="hero-btns">
+                <a href="#agenda" class="btn btn-primary">Xem Chương Trình</a>
+                <a href="#about" class="btn btn-secondary">Khám Phá AI Agent</a>
+            </div>
         </div>
         <div class="hero-image">
             <img src="assets/hero.png" alt="AI Agent Assistant">
         </div>
     </header>
+
+    <section id="agenda" style="background: rgba(0,0,0,0.2);">
+        <div class="section-title scroll-reveal">
+            <span class="highlight" style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Slide 2</span>
+            <h2>Chương Trình Seminar</h2>
+            <p>Hành trình từ Zero đến AI Agent Master</p>
+        </div>
+        
+        <div class="agenda-list scroll-reveal">
+            <div class="agenda-item">
+                <div class="agenda-time">01</div>
+                <div class="agenda-info">
+                    <h3>Khai Phóng Tư Duy</h3>
+                    <p>Tại sao ChatGPT mới chỉ là khởi đầu? Hiểu về "Tư duy Agent" để giải phóng sức lao động.</p>
+                </div>
+            </div>
+            
+            <div class="agenda-item">
+                <div class="agenda-time">02</div>
+                <div class="agenda-info">
+                    <h3>Showcase Thực Tế</h3>
+                    <p>Demo trực tiếp: Agent tự lên kế hoạch du lịch, soạn thảo báo cáo tài chính và quản lý email.</p>
+                </div>
+            </div>
+            
+            <div class="agenda-item">
+                <div class="agenda-time">03</div>
+                <div class="agenda-info">
+                    <h3>Xây Dựng Agent Đầu Tiên</h3>
+                    <p>Thực hành tạo một "Trợ lý ảo" phục vụ công việc của chính bạn - Không cần code.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;" class="scroll-reveal">
+            <a href="#about" class="btn btn-secondary">Tiếp tục tìm hiểu &darr;</a>
+        </div>
+    </section>
 
     <section id="about">
         <div class="section-title scroll-reveal">
@@ -286,26 +376,6 @@
                 <span class="card-icon">🚀</span>
                 <h3>Dành Cho Mọi Người</h3>
                 <p>Giao tiếp hoàn toàn bằng ngôn ngữ tự nhiên. Không cần kiến thức lập trình.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="agenda" style="background: rgba(0,0,0,0.2);">
-        <div class="section-title scroll-reveal">
-            <h2>Nội Dung Seminar</h2>
-        </div>
-        <div class="grid">
-            <div class="card scroll-reveal">
-                <h3>Phần 1: Tổng Quan</h3>
-                <p>Lịch sử hình thành và tại sao AI Agent lại là "Big Thing" tiếp theo sau ChatGPT.</p>
-            </div>
-            <div class="card scroll-reveal">
-                <h3>Phần 2: Case Studies</h3>
-                <p>Xem cách AI Agent soạn email, lên lịch họp và nghiên cứu thị trường tự động.</p>
-            </div>
-            <div class="card scroll-reveal">
-                <h3>Phần 3: Thực Hành</h3>
-                <p>Hướng dẫn tạo "Agent" đầu tiên của riêng bạn chỉ trong 10 phút.</p>
             </div>
         </div>
     </section>
